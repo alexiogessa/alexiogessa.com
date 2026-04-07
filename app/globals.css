@@ -1,0 +1,205 @@
+@import "tailwindcss";
+
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=IBM+Plex+Mono:wght@400;500&family=Lora:ital,wght@0,400;0,500;1,400&display=swap');
+
+:root {
+  --bg: #0e0e0e;
+  --bg-card: #161616;
+  --bg-elevated: #1c1c1c;
+  --copper: #C8762A;
+  --copper-dim: #a05e20;
+  --copper-glow: rgba(200, 118, 42, 0.15);
+  --white: #F5F2ED;
+  --white-dim: rgba(245, 242, 237, 0.65);
+  --white-faint: rgba(245, 242, 237, 0.25);
+  --border: rgba(245, 242, 237, 0.08);
+  --border-copper: rgba(200, 118, 42, 0.25);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--white);
+  font-family: 'Lora', Georgia, serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* Grain overlay */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+  opacity: 0.03;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* Typography */
+.font-display {
+  font-family: 'Barlow Condensed', sans-serif;
+}
+.font-mono {
+  font-family: 'IBM Plex Mono', monospace;
+}
+.font-body {
+  font-family: 'Lora', Georgia, serif;
+}
+
+/* Reveal animation */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Copper line */
+.copper-line {
+  display: block;
+  width: 48px;
+  height: 3px;
+  background: var(--copper);
+  border-radius: 2px;
+}
+
+/* Nav link hover */
+.nav-link {
+  position: relative;
+  color: var(--white-dim);
+  text-decoration: none;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transition: color 0.2s;
+}
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--copper);
+  transition: width 0.25s ease;
+}
+.nav-link:hover {
+  color: var(--white);
+}
+.nav-link:hover::after {
+  width: 100%;
+}
+
+/* Hero fade in */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(32px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.fade-up {
+  animation: fadeUp 0.9s ease forwards;
+}
+.fade-up-1 { animation-delay: 0.1s; opacity: 0; }
+.fade-up-2 { animation-delay: 0.3s; opacity: 0; }
+.fade-up-3 { animation-delay: 0.5s; opacity: 0; }
+.fade-up-4 { animation-delay: 0.7s; opacity: 0; }
+
+/* Image high-contrast treatment */
+.img-treatment {
+  filter: contrast(1.08) brightness(0.92);
+}
+
+/* Commission card hover */
+.commission-card {
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
+}
+.commission-card:hover {
+  border-color: var(--border-copper);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 32px rgba(200, 118, 42, 0.08);
+}
+
+/* Testimonial card */
+.testimonial-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  position: relative;
+  overflow: hidden;
+}
+.testimonial-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--copper);
+}
+
+/* Button styles */
+.btn-primary {
+  display: inline-block;
+  background: var(--copper);
+  color: var(--bg);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  font-size: 0.9375rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 14px 32px;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+}
+.btn-primary:hover {
+  background: var(--copper-dim);
+  transform: translateY(-1px);
+}
+
+.btn-outline {
+  display: inline-block;
+  background: transparent;
+  color: var(--white);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 0.9375rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 13px 32px;
+  text-decoration: none;
+  border: 1px solid var(--white-faint);
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s, transform 0.15s;
+}
+.btn-outline:hover {
+  border-color: var(--copper);
+  color: var(--copper);
+  transform: translateY(-1px);
+}
+
+/* Section label */
+.section-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.6875rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--copper);
+  margin-bottom: 12px;
+  display: block;
+}
