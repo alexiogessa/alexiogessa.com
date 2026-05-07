@@ -266,6 +266,7 @@ body::after {
   #commission-grid .card { padding: 32px !important; }
   .commission-price-row .btn-primary,
   .commission-price-row .btn-outline { min-width: 132px; }
+  .hero-copy h1 { text-shadow: 0 2px 20px rgba(0,0,0,0.62); }
 }
 
 @media (max-width: 767px) {
@@ -284,15 +285,30 @@ body::after {
     font-size: 0.75rem !important;
   }
   .hero-copy {
-    padding-top: 128px !important;
-    padding-bottom: 64px !important;
+    padding-top: 104px !important;
+    padding-bottom: 42px !important;
+  }
+  .hero-copy .section-label {
+    max-width: 280px;
+    font-size: 0.625rem;
+    letter-spacing: 0.12em;
+    line-height: 1.6;
   }
   .hero-copy h1 {
-    font-size: clamp(3.25rem, 16vw, 4.35rem) !important;
-    line-height: 0.92 !important;
+    font-size: clamp(2.8rem, 13.5vw, 3.55rem) !important;
+    line-height: 0.94 !important;
+    margin-bottom: 20px !important;
+    text-shadow: 0 2px 18px rgba(0,0,0,0.55);
   }
   .hero-copy p {
-    margin-bottom: 28px !important;
+    font-size: 0.98rem !important;
+    line-height: 1.65 !important;
+    margin-bottom: 24px !important;
+  }
+  .hero-copy .btn-primary {
+    width: 100%;
+    max-width: 220px;
+    text-align: center;
   }
   #training-grid,
   #commission-grid,
