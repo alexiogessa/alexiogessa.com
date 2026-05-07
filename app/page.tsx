@@ -107,11 +107,7 @@ export default function HomePage() {
           <a href="#home" style={{ fontFamily: "'Barlow Condensed',sans-serif", fontWeight: 900, fontSize: "1.75rem", color: "var(--copper)", textDecoration: "none", letterSpacing: "0.04em" }}>AG</a>
           <nav style={{ display: "flex", alignItems: "center", gap: "40px" }}>
             {[["About","#about"],["Training","#training"],["Portfolio","#portfolio"],["Commissions","#commissions"],["Contact","#contact"]].map(([l,h]) => (
-              <a key={h} href={h} className="nav-link" style={{ display: "none" }}>{l}</a>
-            ))}
-            <style>{`@media(min-width:768px){.nav-link{display:inline!important}}`}</style>
-            {[["About","#about"],["Training","#training"],["Portfolio","#portfolio"],["Commissions","#commissions"],["Contact","#contact"]].map(([l,h]) => (
-              <a key={h+"-v"} href={h} className="nav-link nav-visible">{l}</a>
+              <a key={h} href={h} className="nav-link nav-visible">{l}</a>
             ))}
             <style>{`.nav-visible{display:none}@media(min-width:768px){.nav-visible{display:inline}}`}</style>
           </nav>
@@ -147,7 +143,8 @@ export default function HomePage() {
 
         {/* Stats */}
         <div style={{ position: "relative", zIndex: 10, borderTop: "1px solid rgba(245,242,237,0.07)", background: "rgba(14,14,14,0.75)", backdropFilter: "blur(8px)" }}>
-          <div className="container" style={{ paddingTop: "24px", paddingBottom: "24px", display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: "24px" }}>
+          <div id="hero-stats-grid" className="container" style={{ paddingTop: "24px", paddingBottom: "24px", display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: "24px" }}>
+            <style>{`@media(max-width:767px){#hero-stats-grid{grid-template-columns:repeat(2,1fr)!important;gap:18px 16px!important}}`}</style>
             {[["15+","Years Training"],["Kubert","School of Art"],["Manhattan","In-Person"],["Worldwide","Virtual"]].map(([n,l]) => (
               <div key={n}>
                 <div style={{ fontFamily: "'Barlow Condensed',sans-serif", fontWeight: 900, fontSize: "1.625rem", color: "var(--copper)" }}>{n}</div>
