@@ -69,7 +69,7 @@ function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px" }}>
+      <div className="contact-name-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px" }}>
         <div><label style={label}>Name</label><input type="text" name="name" required placeholder="Your full name" style={field} /></div>
         <div><label style={label}>Email</label><input type="email" name="email" required placeholder="you@example.com" style={field} /></div>
       </div>
@@ -118,25 +118,23 @@ export default function HomePage() {
       {/* HERO */}
       <section id="home" style={{ position: "relative", minHeight: "100vh", display: "flex", flexDirection: "column", justifyContent: "flex-end", overflow: "hidden", background: "var(--bg)" }}>
         <div style={{ position: "absolute", inset: 0, zIndex: 0 }}>
-          <Image src="/alexio-hero.jpg" alt="Alexio Gessa training at a Smith machine" fill priority style={{ objectFit: "cover", objectPosition: "center 22%", filter: "grayscale(20%) contrast(1.05) brightness(0.5)" }} />
-          <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to right, rgba(14,14,14,0.96) 40%, rgba(14,14,14,0.6) 75%, rgba(14,14,14,0.3) 100%)" }} />
-          <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(14,14,14,1) 0%, transparent 55%)" }} />
+          <Image src="/alexio-hero.jpg" alt="Alexio Gessa training at a Smith machine" fill priority style={{ objectFit: "cover", objectPosition: "62% 20%", filter: "grayscale(16%) contrast(1.04) brightness(0.64)" }} />
+          <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to right, rgba(14,14,14,0.92) 34%, rgba(14,14,14,0.52) 72%, rgba(14,14,14,0.18) 100%)" }} />
+          <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(14,14,14,0.96) 0%, transparent 58%)" }} />
         </div>
 
-        <div className="container" style={{ position: "relative", zIndex: 10, paddingTop: "160px", paddingBottom: "120px" }}>
-          <div style={{ maxWidth: "700px" }}>
-            <div className="section-label fade-up fade-up-1" style={{ marginBottom: "20px" }}>New York City</div>
-            <h1 className="fade-up fade-up-2" style={{ fontFamily: "'Barlow Condensed',sans-serif", fontWeight: 900, fontSize: "clamp(5rem,11vw,9.5rem)", lineHeight: 0.88, letterSpacing: "-0.02em", color: "var(--white)", marginBottom: "32px" }}>
-              TRAIN.<br />
-              <span style={{ color: "var(--copper)" }}>CREATE.</span><br />
-              EVOLVE.
+        <div className="container hero-copy" style={{ position: "relative", zIndex: 10, paddingTop: "160px", paddingBottom: "96px" }}>
+          <div style={{ maxWidth: "760px" }}>
+            <div className="section-label fade-up fade-up-1" style={{ marginBottom: "20px" }}>Independent personal training • Manhattan</div>
+            <h1 className="fade-up fade-up-2" style={{ fontFamily: "'Barlow Condensed',sans-serif", fontWeight: 900, fontSize: "clamp(3.85rem,8.2vw,7.75rem)", lineHeight: 0.9, letterSpacing: "-0.02em", color: "var(--white)", marginBottom: "28px", maxWidth: "820px" }}>
+              Train with someone who actually pays attention.
             </h1>
-            <p className="fade-up fade-up-3" style={{ fontFamily: "'Lora',Georgia,serif", fontSize: "clamp(1rem,1.5vw,1.1875rem)", lineHeight: 1.8, color: "rgba(245,242,237,0.65)", maxWidth: "520px", marginBottom: "48px" }}>
-              Personal trainer and visual artist based in New York City. I build bodies and bring creative visions to life.
+            <p className="fade-up fade-up-3" style={{ fontFamily: "'Lora',Georgia,serif", fontSize: "clamp(1.05rem,1.55vw,1.25rem)", lineHeight: 1.75, color: "rgba(245,242,237,0.78)", maxWidth: "620px", marginBottom: "34px" }}>
+              1-on-1 strength and physique coaching at MidCity Gym in Manhattan, plus virtual programming worldwide. 15 years in-person experience. No template programs.
             </p>
-            <div className="fade-up fade-up-4" style={{ display: "flex", flexWrap: "wrap", gap: "16px" }}>
-              <a href="#training" className="btn-primary">Train With Me</a>
-              <a href="#portfolio" className="btn-outline">View Portfolio</a>
+            <div className="fade-up fade-up-4" style={{ display: "flex", flexDirection: "column", alignItems: "flex-start", gap: "16px" }}>
+              <a href="#contact" className="btn-primary">Book a Session</a>
+              <a href="#portfolio" className="quiet-link">Or see his artwork →</a>
             </div>
           </div>
         </div>
@@ -158,9 +156,9 @@ export default function HomePage() {
       {/* ABOUT */}
       <section id="about" style={{ background: "var(--bg)" }}>
         <div className="container section-pad">
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(40px,6vw,100px)", alignItems: "center" }}>
+          <div id="about-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(40px,6vw,100px)", alignItems: "center" }}>
             <style>{`@media(max-width:767px){#about-grid{grid-template-columns:1fr!important}}`}</style>
-            <div id="about-grid" style={{ display: "contents" }}>
+            <div style={{ display: "contents" }}>
               <Reveal>
                 <div style={{ position: "relative", maxWidth: "500px" }}>
                   <div style={{ position: "relative", aspectRatio: "4/5", overflow: "hidden", border: "1px solid rgba(245,242,237,0.07)" }}>
@@ -221,9 +219,9 @@ export default function HomePage() {
             </div>
           </Reveal>
 
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "24px", maxWidth: "960px", margin: "0 auto 40px" }}>
-            <style>{`@media(max-width:640px){#training-grid{grid-template-columns:1fr!important}}`}</style>
-            <div id="training-grid" style={{ display: "contents" }}>
+          <div id="training-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "24px", maxWidth: "960px", margin: "0 auto 40px" }}>
+            <style>{`@media(max-width:767px){#training-grid{grid-template-columns:1fr!important}}`}</style>
+            <div style={{ display: "contents" }}>
               {[
                 { format: "In-Person", location: "MidCity Gym, Manhattan", rate: "$150", desc: "One-on-one sessions in Manhattan. Programming, hands-on technique coaching, and real accountability.", features: ["Custom programming","Technique coaching","Progress tracking","Nutrition guidance"] },
                 { format: "Virtual", location: "Anywhere", rate: "$75", desc: "Live video coaching, same quality as in-person. Works with any schedule, any city, any gym setup.", features: ["Live video sessions","Custom programming","Form review & feedback","Flexible scheduling"] },
@@ -240,9 +238,9 @@ export default function HomePage() {
                     <p style={{ fontFamily: "'Lora',Georgia,serif", fontSize: "1.0625rem", lineHeight: 1.75, color: "rgba(245,242,237,0.58)", marginBottom: "28px", flex: 1 }}>{s.desc}</p>
                     <ul style={{ listStyle: "none", marginBottom: "32px", display: "flex", flexDirection: "column", gap: "10px" }}>
                       {s.features.map((f) => (
-                        <li key={f} style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-                          <span style={{ color: "var(--copper)", fontSize: "1rem", lineHeight: 1 }}>—</span>
-                          <span style={{ fontFamily: "'IBM Plex Mono',monospace", fontSize: "0.6875rem", letterSpacing: "0.06em", color: "rgba(245,242,237,0.45)" }}>{f}</span>
+                        <li key={f} className="feature-item">
+                          <span className="feature-dot" aria-hidden="true" />
+                          <span style={{ fontFamily: "'IBM Plex Mono',monospace", fontSize: "0.6875rem", letterSpacing: "0.06em", color: "rgba(245,242,237,0.56)" }}>{f}</span>
                         </li>
                       ))}
                     </ul>
@@ -323,9 +321,9 @@ export default function HomePage() {
             </div>
           </Reveal>
 
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: "20px", maxWidth: "1060px", margin: "0 auto 40px" }}>
-            <style>{`@media(max-width:768px){#commission-grid{grid-template-columns:1fr!important}}`}</style>
-            <div id="commission-grid" style={{ display: "contents" }}>
+          <div id="commission-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: "20px", maxWidth: "1060px", margin: "0 auto 40px" }}>
+            <style>{`@media(max-width:900px){#commission-grid{grid-template-columns:1fr!important}}`}</style>
+            <div style={{ display: "contents" }}>
               {[
                 { tier: "Pencil Portrait", desc: "Rendered pencil sketch. Black and white, clean and detailed. Great for character studies and personal portraits.", price: "$75", time: "1-2 weeks", items: ["Pencil on paper or digital","High-res file","One revision"], featured: false },
                 { tier: "Inked Illustration", desc: "Fully inked character illustration. Dynamic poses, expressive linework, comic-style execution.", price: "$150", time: "2-3 weeks", items: ["Pencils + inks","High-res file","Two revisions"], featured: true },
@@ -339,14 +337,15 @@ export default function HomePage() {
                     <p style={{ fontFamily: "'Lora',Georgia,serif", fontSize: "0.9375rem", lineHeight: 1.75, color: "rgba(245,242,237,0.55)", marginBottom: "24px", flex: 1 }}>{c.desc}</p>
                     <ul style={{ listStyle: "none", marginBottom: "28px", display: "flex", flexDirection: "column", gap: "8px" }}>
                       {c.items.map((item) => (
-                        <li key={item} style={{ display: "flex", gap: "10px", fontFamily: "'IBM Plex Mono',monospace", fontSize: "0.625rem", letterSpacing: "0.06em", color: "rgba(245,242,237,0.4)" }}>
-                          <span style={{ color: "var(--copper)" }}>—</span>{item}
+                        <li key={item} className="feature-item" style={{ fontFamily: "'IBM Plex Mono',monospace", fontSize: "0.625rem", letterSpacing: "0.06em", color: "rgba(245,242,237,0.52)" }}>
+                          <span className="feature-dot" aria-hidden="true" />
+                          <span>{item}</span>
                         </li>
                       ))}
                     </ul>
-                    <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", borderTop: "1px solid rgba(245,242,237,0.07)", paddingTop: "24px" }}>
+                    <div className="commission-price-row" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "16px", borderTop: "1px solid rgba(245,242,237,0.07)", paddingTop: "24px" }}>
                       <span style={{ fontFamily: "'Barlow Condensed',sans-serif", fontWeight: 900, fontSize: "3rem", color: "var(--copper)", lineHeight: 1 }}>{c.price}</span>
-                      <a href="#contact" className={c.featured ? "btn-primary" : "btn-outline"} style={{ padding: "10px 20px", fontSize: "0.8125rem" }}>Request</a>
+                      <a href="#contact" className={c.featured ? "btn-primary" : "btn-outline"} style={{ padding: "12px 22px", fontSize: "0.8125rem", textAlign: "center" }}>Request</a>
                     </div>
                   </div>
                 </Reveal>
@@ -374,9 +373,9 @@ export default function HomePage() {
               </h2>
             </div>
           </Reveal>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "20px", maxWidth: "960px", margin: "0 auto" }}>
-            <style>{`@media(max-width:640px){#testi-grid{grid-template-columns:1fr!important}}`}</style>
-            <div id="testi-grid" style={{ display: "contents" }}>
+          <div id="testi-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "20px", maxWidth: "960px", margin: "0 auto" }}>
+            <style>{`@media(max-width:767px){#testi-grid{grid-template-columns:1fr!important}}`}</style>
+            <div style={{ display: "contents" }}>
               {[
                 { text: "Alexio is one of the most knowledgeable trainers I have worked with. He explains the why behind every movement. I made more progress in three months than I did in the previous year training on my own.", name: "Training Client", detail: "In-person, Manhattan" },
                 { text: "The commission he did for me was incredible. He captured exactly what I had in my head, down to details I barely articulated. Fast, professional, and genuinely talented.", name: "Commission Client", detail: "Character illustration" },
@@ -400,9 +399,9 @@ export default function HomePage() {
       {/* CONTACT */}
       <section id="contact" style={{ background: "var(--bg-card)" }}>
         <div className="container section-pad">
-          <div style={{ display: "grid", gridTemplateColumns: "2fr 3fr", gap: "clamp(40px,6vw,100px)" }}>
+          <div id="contact-grid" style={{ display: "grid", gridTemplateColumns: "2fr 3fr", gap: "clamp(40px,6vw,100px)" }}>
             <style>{`@media(max-width:767px){#contact-grid{grid-template-columns:1fr!important}}`}</style>
-            <div id="contact-grid" style={{ display: "contents" }}>
+            <div style={{ display: "contents" }}>
               <div>
                 <Reveal>
                   <span className="section-label">Get In Touch</span>

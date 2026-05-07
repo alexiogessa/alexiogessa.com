@@ -236,3 +236,91 @@ body::after {
 
 /* Image treatment */
 .img-bw { filter: grayscale(30%) contrast(1.05) brightness(0.9); }
+
+.quiet-link {
+  color: rgba(245, 242, 237, 0.72);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.quiet-link:hover { color: var(--copper); }
+
+.feature-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.feature-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--copper);
+  box-shadow: 0 0 0 4px rgba(200, 118, 42, 0.08);
+  flex: 0 0 6px;
+}
+
+@media (max-width: 900px) {
+  #commission-grid .card { padding: 32px !important; }
+  .commission-price-row .btn-primary,
+  .commission-price-row .btn-outline { min-width: 132px; }
+}
+
+@media (max-width: 767px) {
+  :root { --px: clamp(20px, 6vw, 28px); }
+  .section-pad {
+    padding-top: 72px;
+    padding-bottom: 72px;
+  }
+  header .container {
+    padding-top: 14px !important;
+    padding-bottom: 14px !important;
+    gap: 16px;
+  }
+  header .btn-primary {
+    padding: 10px 16px !important;
+    font-size: 0.75rem !important;
+  }
+  .hero-copy {
+    padding-top: 128px !important;
+    padding-bottom: 64px !important;
+  }
+  .hero-copy h1 {
+    font-size: clamp(3.25rem, 16vw, 4.35rem) !important;
+    line-height: 0.92 !important;
+  }
+  .hero-copy p {
+    margin-bottom: 28px !important;
+  }
+  #training-grid,
+  #commission-grid,
+  #testi-grid,
+  #contact-grid,
+  #about-grid,
+  .contact-name-grid {
+    grid-template-columns: 1fr !important;
+  }
+  #portfolio-grid {
+    gap: 14px !important;
+  }
+  #training-grid .btn-primary,
+  #contact .btn-primary {
+    width: 100%;
+    text-align: center;
+  }
+  .commission-price-row {
+    flex-direction: column;
+    align-items: stretch !important;
+  }
+  .commission-price-row .btn-primary,
+  .commission-price-row .btn-outline {
+    width: 100%;
+    text-align: center;
+  }
+  .testimonial-card p,
+  .testimonial-card div {
+    padding-left: 12px !important;
+  }
+}
