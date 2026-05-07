@@ -291,6 +291,8 @@ body::after {
   .hero-copy {
     padding-top: 96px !important;
     padding-bottom: 30px !important;
+    max-width: 100%;
+    overflow-wrap: anywhere;
   }
   .hero-copy .section-label {
     max-width: 300px;
@@ -300,13 +302,15 @@ body::after {
     margin-bottom: 14px !important;
   }
   .hero-copy h1 {
-    font-size: clamp(2.45rem, 11.8vw, 3.05rem) !important;
-    line-height: 0.95 !important;
+    max-width: 100%;
+    font-size: clamp(2.3rem, 10.8vw, 2.8rem) !important;
+    line-height: 0.98 !important;
     margin-bottom: 16px !important;
     text-shadow: 0 2px 18px rgba(0,0,0,0.55);
   }
   .hero-copy p {
-    font-size: 0.9rem !important;
+    max-width: 100%;
+    font-size: 0.88rem !important;
     line-height: 1.55 !important;
     margin-bottom: 20px !important;
   }
