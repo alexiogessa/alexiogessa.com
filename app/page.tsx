@@ -122,7 +122,7 @@ export default function HomePage() {
       {/* HERO */}
       <section id="home" style={{ position: "relative", minHeight: "100vh", display: "flex", flexDirection: "column", justifyContent: "flex-end", overflow: "hidden", background: "var(--bg)" }}>
         <div style={{ position: "absolute", inset: 0, zIndex: 0 }}>
-          <Image src="/hero-placeholder.jpg" alt="Alexio Gessa — Personal Trainer" fill priority style={{ objectFit: "cover", objectPosition: "center top", filter: "grayscale(20%) contrast(1.05) brightness(0.5)" }} />
+          <Image src="/alexio-hero.jpg" alt="Alexio Gessa training at a Smith machine" fill priority style={{ objectFit: "cover", objectPosition: "center 22%", filter: "grayscale(20%) contrast(1.05) brightness(0.5)" }} />
           <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to right, rgba(14,14,14,0.96) 40%, rgba(14,14,14,0.6) 75%, rgba(14,14,14,0.3) 100%)" }} />
           <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(14,14,14,1) 0%, transparent 55%)" }} />
         </div>
@@ -167,7 +167,7 @@ export default function HomePage() {
               <Reveal>
                 <div style={{ position: "relative", maxWidth: "500px" }}>
                   <div style={{ position: "relative", aspectRatio: "4/5", overflow: "hidden", border: "1px solid rgba(245,242,237,0.07)" }}>
-                    <Image src="/about-placeholder.jpg" alt="Alexio Gessa" fill style={{ objectFit: "cover", objectPosition: "center top", filter: "grayscale(15%) contrast(1.05)" }} />
+                    <Image src="/alexio-about.jpg" alt="Alexio Gessa smiling in the gym with a shaker bottle" fill style={{ objectFit: "cover", objectPosition: "center top", filter: "grayscale(15%) contrast(1.05)" }} />
                   </div>
                   <div style={{ position: "absolute", top: "-12px", left: "-12px", width: "60px", height: "60px", borderTop: "3px solid var(--copper)", borderLeft: "3px solid var(--copper)" }} />
                   <div style={{ position: "absolute", bottom: "-12px", right: "-12px", width: "60px", height: "60px", borderBottom: "3px solid var(--copper)", borderRight: "3px solid var(--copper)" }} />
@@ -282,26 +282,28 @@ export default function HomePage() {
             </div>
           </Reveal>
 
-          {/* Asymmetric grid */}
+          {/* Portfolio grid */}
           <Reveal delay={0.1}>
-            <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr", gridTemplateRows: "auto auto", gap: "8px", marginBottom: "12px" }}>
-              <div style={{ gridRow: "1 / 3", position: "relative", aspectRatio: "1/1.1", overflow: "hidden", border: "1px solid rgba(245,242,237,0.06)" }}>
-                <Image src="/art-sample-1.jpg" alt="Portfolio" fill style={{ objectFit: "cover", filter: "grayscale(10%) contrast(1.05)", transition: "transform 0.6s ease" }} onMouseEnter={e => (e.currentTarget.style.transform="scale(1.04)")} onMouseLeave={e => (e.currentTarget.style.transform="scale(1)")} />
-                <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: "20px", background: "linear-gradient(to top,rgba(14,14,14,0.85),transparent)", opacity: 0, transition: "opacity 0.3s" }} onMouseEnter={e => (e.currentTarget.style.opacity="1")} onMouseLeave={e => (e.currentTarget.style.opacity="0")}>
-                  <span style={{ fontFamily: "'IBM Plex Mono',monospace", fontSize: "0.625rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--copper)" }}>Character Design</span>
-                </div>
-              </div>
-              {[{src:"/art-sample-2.jpg",label:"Illustration"},{src:"/art-sample-3.jpg",label:"Figure Study"},{src:"/art-sample-4.jpg",label:"Concept Art"},{src:"/art-sample-1.jpg",label:"Sequential Art"}].map((item) => (
-                <div key={item.label} style={{ position: "relative", aspectRatio: "1", overflow: "hidden", border: "1px solid rgba(245,242,237,0.06)" }}>
-                  <Image src={item.src} alt={item.label} fill style={{ objectFit: "cover", filter: "grayscale(10%) contrast(1.05)" }} />
-                </div>
-              ))}
+            <div id="portfolio-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: "8px", marginBottom: "12px" }}>
+              <style>{`@media(max-width:767px){#portfolio-grid{grid-template-columns:1fr!important}}`}</style>
+                {[
+                  { src: "/art-frankenstein.jpg", label: "Frankenstein", alt: "Painting of Frankenstein's monster against a coral background" },
+                  { src: "/art-figure-sword.jpg", label: "Warrior Study", alt: "Painting of a woman holding a sword surrounded by green energy" },
+                  { src: "/art-pie-portrait.jpg", label: "Still Life Portrait", alt: "Painting of a man in a hat beside a slice of pie on a plate" },
+                ].map((item) => (
+                  <div key={item.label} style={{ position: "relative", aspectRatio: "4/5", overflow: "hidden", border: "1px solid rgba(245,242,237,0.06)" }}>
+                    <Image src={item.src} alt={item.alt} fill style={{ objectFit: "cover", filter: "grayscale(10%) contrast(1.05)", transition: "transform 0.6s ease" }} onMouseEnter={e => (e.currentTarget.style.transform="scale(1.04)")} onMouseLeave={e => (e.currentTarget.style.transform="scale(1)")} />
+                    <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, padding: "20px", background: "linear-gradient(to top,rgba(14,14,14,0.85),transparent)" }}>
+                      <span style={{ fontFamily: "'IBM Plex Mono',monospace", fontSize: "0.625rem", letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--copper)" }}>{item.label}</span>
+                    </div>
+                  </div>
+                ))}
             </div>
           </Reveal>
 
           <Reveal delay={0.15}>
             <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginTop: "40px" }}>
-              <p style={{ fontFamily: "'IBM Plex Mono',monospace", fontSize: "0.625rem", letterSpacing: "0.1em", color: "rgba(245,242,237,0.2)" }}>Placeholder images — Alexio&apos;s actual work coming soon</p>
+              <p style={{ fontFamily: "'IBM Plex Mono',monospace", fontSize: "0.625rem", letterSpacing: "0.1em", color: "rgba(245,242,237,0.2)" }}>Selected artwork by Alexio Gessa</p>
               <a href="#commissions" className="btn-outline">Commission a Piece</a>
             </div>
           </Reveal>
