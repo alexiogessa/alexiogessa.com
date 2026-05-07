@@ -294,6 +294,9 @@ body::after {
     max-width: 100%;
     overflow-wrap: anywhere;
   }
+  .hero-copy > div {
+    max-width: min(300px, calc(100vw - 48px)) !important;
+  }
   .hero-copy .section-label {
     max-width: 300px;
     font-size: 0.6rem;
@@ -303,7 +306,7 @@ body::after {
   }
   .hero-copy h1 {
     max-width: 100%;
-    font-size: clamp(2.3rem, 10.8vw, 2.8rem) !important;
+    font-size: clamp(2rem, 9.6vw, 2.42rem) !important;
     line-height: 0.98 !important;
     margin-bottom: 16px !important;
     text-shadow: 0 2px 18px rgba(0,0,0,0.55);
