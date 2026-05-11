@@ -108,7 +108,7 @@ export default function HomePage() {
             {[["About","#about"],["Training","#training"],["Portfolio","#portfolio"],["Commissions","#commissions"],["Contact","#contact"]].map(([l,h]) => (
               <a key={h} href={h} className="nav-link nav-visible">{l}</a>
             ))}
-            <style>{`.nav-visible{display:none}@media(min-width:768px){.nav-visible{display:inline}}@media(max-width:767px){.site-header-bar{padding-left:18px!important;padding-right:18px!important}.site-header-nav{display:none!important}.site-header-cta{padding:8px 14px!important;font-size:.75rem!important;letter-spacing:.1em!important}}`}</style>
+            <style>{`.nav-visible{display:none}@media(min-width:768px){.nav-visible{display:inline}}@media(max-width:767px){.site-header-bar{padding-left:18px!important;padding-right:18px!important}.site-header-nav{display:none!important}.site-header-cta{display:none!important}}`}</style>
           </nav>
           <a href="#contact" className="btn-primary site-header-cta" style={{ padding: "10px 22px", fontSize: "0.8125rem" }}>Book Now</a>
         </div>
