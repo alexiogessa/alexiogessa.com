@@ -102,15 +102,15 @@ export default function HomePage() {
     <>
       {/* NAV */}
       <header style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 50, background: "rgba(14,14,14,0.93)", backdropFilter: "blur(12px)", borderBottom: "1px solid rgba(245,242,237,0.06)" }}>
-        <div className="container" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", paddingTop: "18px", paddingBottom: "18px" }}>
+        <div className="container site-header-bar" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", paddingTop: "18px", paddingBottom: "18px" }}>
           <a href="#home" style={{ fontFamily: "'Barlow Condensed',sans-serif", fontWeight: 900, fontSize: "1.75rem", color: "var(--copper)", textDecoration: "none", letterSpacing: "0.04em" }}>AG</a>
-          <nav style={{ display: "flex", alignItems: "center", gap: "40px" }}>
+          <nav className="site-header-nav" style={{ display: "flex", alignItems: "center", gap: "40px" }}>
             {[["About","#about"],["Training","#training"],["Portfolio","#portfolio"],["Commissions","#commissions"],["Contact","#contact"]].map(([l,h]) => (
               <a key={h} href={h} className="nav-link nav-visible">{l}</a>
             ))}
-            <style>{`.nav-visible{display:none}@media(min-width:768px){.nav-visible{display:inline}}`}</style>
+            <style>{`.nav-visible{display:none}@media(min-width:768px){.nav-visible{display:inline}}@media(max-width:767px){.site-header-bar{padding-left:18px!important;padding-right:18px!important}.site-header-nav{display:none!important}.site-header-cta{padding:8px 14px!important;font-size:.75rem!important;letter-spacing:.1em!important}}`}</style>
           </nav>
-          <a href="#contact" className="btn-primary" style={{ padding: "10px 22px", fontSize: "0.8125rem" }}>Book Now</a>
+          <a href="#contact" className="btn-primary site-header-cta" style={{ padding: "10px 22px", fontSize: "0.8125rem" }}>Book Now</a>
         </div>
       </header>
 
