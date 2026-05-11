@@ -212,10 +212,12 @@ body::after {
   background: var(--copper);
 }
 
-/* Reveal animation */
+/* Reveal animation
+   Content stays visible by default so sections never disappear if IntersectionObserver
+   is delayed, blocked, or unsupported. The visible class still supports future motion. */
 .reveal {
-  opacity: 0;
-  transform: translateY(28px);
+  opacity: 1;
+  transform: translateY(0);
   transition: opacity 0.75s ease, transform 0.75s ease;
 }
 .reveal.visible {
@@ -297,6 +299,11 @@ body::after {
   .hero-copy > div {
     max-width: min(300px, calc(100vw - 48px)) !important;
   }
+  .hero-copy .fade-up {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+  }
   .hero-copy .section-label {
     max-width: 300px;
     font-size: 0.6rem;
@@ -308,6 +315,7 @@ body::after {
     max-width: 100%;
     font-size: clamp(2rem, 9.6vw, 2.42rem) !important;
     line-height: 0.98 !important;
+    color: var(--white) !important;
     margin-bottom: 16px !important;
     text-shadow: 0 2px 18px rgba(0,0,0,0.55);
   }

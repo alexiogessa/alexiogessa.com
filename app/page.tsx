@@ -25,24 +25,23 @@ function Reveal({ children, delay = 0, style = {} }: { children: React.ReactNode
 }
 
 function ContactForm() {
-  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
-  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
+  const [status, setStatus] = useState<"idle" | "sent" | "error">("idle");
+  function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setStatus("sending");
     const form = e.currentTarget;
+    const name = (form.elements.namedItem("name") as HTMLInputElement).value;
+    const email = (form.elements.namedItem("email") as HTMLInputElement).value;
+    const reason = (form.elements.namedItem("reason") as HTMLSelectElement).value;
+    const message = (form.elements.namedItem("message") as HTMLTextAreaElement).value;
+    const subject = encodeURIComponent(`Alexio Gessa inquiry — ${reason}`);
+    const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\nInterest: ${reason}\n\n${message}`);
     try {
-      const res = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: (form.elements.namedItem("name") as HTMLInputElement).value,
-          email: (form.elements.namedItem("email") as HTMLInputElement).value,
-          reason: (form.elements.namedItem("reason") as HTMLSelectElement).value,
-          message: (form.elements.namedItem("message") as HTMLTextAreaElement).value,
-        }),
-      });
-      if (res.ok) { setStatus("sent"); form.reset(); } else setStatus("error");
-    } catch { setStatus("error"); }
+      window.location.href = `mailto:alexio@alexiogessa.com?subject=${subject}&body=${body}`;
+      setStatus("sent");
+      form.reset();
+    } catch {
+      setStatus("error");
+    }
   }
 
   const field: React.CSSProperties = {
@@ -88,11 +87,11 @@ function ContactForm() {
         <textarea name="message" required rows={5} placeholder="Tell me what you are looking for." style={{ ...field, resize: "vertical", minHeight: "140px" }} />
       </div>
       <div>
-        <button type="submit" disabled={status === "sending"} className="btn-primary" style={{ opacity: status === "sending" ? 0.5 : 1 }}>
-          {status === "sending" ? "Sending..." : "Send Message"}
+        <button type="submit" className="btn-primary">
+          Send Inquiry
         </button>
-        {status === "sent" && <p style={{ color: "#4ade80", fontFamily: "monospace", fontSize: "0.875rem", marginTop: "12px" }}>Sent. I will get back to you within 24 hours.</p>}
-        {status === "error" && <p style={{ color: "#f87171", fontFamily: "monospace", fontSize: "0.875rem", marginTop: "12px" }}>Something went wrong. Please try again.</p>}
+        {status === "sent" && <p style={{ color: "#4ade80", fontFamily: "monospace", fontSize: "0.875rem", marginTop: "12px" }}>Your email app should open with the inquiry ready to send.</p>}
+        {status === "error" && <p style={{ color: "#f87171", fontFamily: "monospace", fontSize: "0.875rem", marginTop: "12px" }}>Something went wrong. Email alexio@alexiogessa.com directly.</p>}
       </div>
     </form>
   );
@@ -130,7 +129,7 @@ export default function HomePage() {
               Train with someone who actually pays attention.
             </h1>
             <p className="fade-up fade-up-3" style={{ fontFamily: "'Lora',Georgia,serif", fontSize: "clamp(1.05rem,1.55vw,1.25rem)", lineHeight: 1.75, color: "rgba(245,242,237,0.78)", maxWidth: "620px", marginBottom: "34px" }}>
-              1-on-1 strength and physique coaching at MidCity Gym in Manhattan, plus virtual programming worldwide. 15 years in-person experience. No template programs.
+              One-on-one strength, physique, and mobility coaching at MidCity Gym in Manhattan, plus virtual programming worldwide. Fifteen years of hands-on experience. No template programs.
             </p>
             <div className="fade-up fade-up-4" style={{ display: "flex", flexDirection: "column", alignItems: "flex-start", gap: "16px" }}>
               <a href="#contact" className="btn-primary">Book a Session</a>
@@ -183,10 +182,10 @@ export default function HomePage() {
                 </Reveal>
                 <Reveal delay={0.1}>
                   <p style={{ fontFamily: "'Lora',Georgia,serif", fontSize: "clamp(1rem,1.4vw,1.125rem)", lineHeight: 1.85, color: "rgba(245,242,237,0.62)", marginBottom: "20px" }}>
-                    I have been training people and building my own physique for over 15 years. I take the craft seriously — programming, technique, and the consistency that actually produces results.
+                    I have spent more than 15 years training people and building my own physique. My coaching is precise, attentive, and practical — built around programming, technique, mobility, and the consistency that actually produces results.
                   </p>
                   <p style={{ fontFamily: "'Lora',Georgia,serif", fontSize: "clamp(1rem,1.4vw,1.125rem)", lineHeight: 1.85, color: "rgba(245,242,237,0.62)", marginBottom: "20px" }}>
-                    I am also a trained visual artist, a graduate of the Joe Kubert School of Cartoon and Graphic Art. My work lives in character design, figure drawing, and sequential storytelling.
+                    I am also a trained visual artist and a graduate of the Joe Kubert School of Cartoon and Graphic Art. My work lives in portraiture, character illustration, figure drawing, and sequential storytelling.
                   </p>
                   <p style={{ fontFamily: "'Lora',Georgia,serif", fontSize: "clamp(1rem,1.4vw,1.125rem)", lineHeight: 1.85, color: "rgba(245,242,237,0.62)", marginBottom: "40px" }}>
                     Both disciplines require discipline, an eye for detail, and a commitment to showing up. I bring the same approach to every client and every commission.
@@ -214,7 +213,7 @@ export default function HomePage() {
                 BUILD SOMETHING<br />THAT LASTS.
               </h2>
               <p style={{ fontFamily: "'Lora',Georgia,serif", fontSize: "clamp(1rem,1.4vw,1.125rem)", lineHeight: 1.8, color: "rgba(245,242,237,0.6)" }}>
-                Results come from consistency, not complexity. I program for your body, your schedule, and your goals.
+                Results come from consistency, not guesswork. Alexio programs for your body, your schedule, and your goals — then coaches the details most people miss.
               </p>
             </div>
           </Reveal>
@@ -223,8 +222,8 @@ export default function HomePage() {
             <style>{`@media(max-width:767px){#training-grid{grid-template-columns:1fr!important}}`}</style>
             <div style={{ display: "contents" }}>
               {[
-                { format: "In-Person", location: "MidCity Gym, Manhattan", rate: "$150", desc: "One-on-one sessions in Manhattan. Programming, hands-on technique coaching, and real accountability.", features: ["Custom programming","Technique coaching","Progress tracking","Nutrition guidance"] },
-                { format: "Virtual", location: "Anywhere", rate: "$75", desc: "Live video coaching, same quality as in-person. Works with any schedule, any city, any gym setup.", features: ["Live video sessions","Custom programming","Form review & feedback","Flexible scheduling"] },
+                { format: "In-Person", location: "MidCity Gym, Manhattan", rate: "$150", desc: "Private coaching for strength, physique, mobility, and better movement. Hands-on corrections, custom programming, and real accountability.", features: ["Custom programming","Technique coaching","Progress tracking","Nutrition guidance"] },
+                { format: "Virtual", location: "Anywhere", rate: "$75", desc: "Remote coaching for people who want structure without guessing. Programming, form review, and feedback built around your equipment and schedule.", features: ["Live video sessions","Custom programming","Form review & feedback","Flexible scheduling"] },
               ].map((s, i) => (
                 <Reveal key={s.format} delay={i * 0.1}>
                   <div className="card" style={{ padding: "clamp(32px,4vw,48px)", display: "flex", flexDirection: "column", height: "100%" }}>
@@ -316,7 +315,7 @@ export default function HomePage() {
                 COMMISSION<br />YOUR VISION.
               </h2>
               <p style={{ fontFamily: "'Lora',Georgia,serif", fontSize: "clamp(1rem,1.4vw,1.125rem)", lineHeight: 1.8, color: "rgba(245,242,237,0.6)" }}>
-                Custom illustrations built from scratch to your specifications.
+                Portraits and character illustrations built with strong draftsmanship, expressive linework, and a comic-art foundation.
               </p>
             </div>
           </Reveal>
@@ -325,9 +324,9 @@ export default function HomePage() {
             <style>{`@media(max-width:900px){#commission-grid{grid-template-columns:1fr!important}}`}</style>
             <div style={{ display: "contents" }}>
               {[
-                { tier: "Pencil Portrait", desc: "Rendered pencil sketch. Black and white, clean and detailed. Great for character studies and personal portraits.", price: "$75", time: "1-2 weeks", items: ["Pencil on paper or digital","High-res file","One revision"], featured: false },
-                { tier: "Inked Illustration", desc: "Fully inked character illustration. Dynamic poses, expressive linework, comic-style execution.", price: "$150", time: "2-3 weeks", items: ["Pencils + inks","High-res file","Two revisions"], featured: true },
-                { tier: "Full Color Piece", desc: "Fully realized color illustration. Characters, scenes, cover concepts, and original artwork.", price: "$300+", time: "3-5 weeks", items: ["Full color rendering","Print-ready file","Multiple revisions"], featured: false },
+                { tier: "Pencil Sketch Portrait", desc: "A detailed portrait study with clean structure, likeness, and expressive pencil work. Best for personal portraits and character studies.", price: "$1,325", time: "By request", items: ["Pencil portrait study","High-res file","One revision"], featured: false },
+                { tier: "Inked Character Illustration", desc: "A fully inked character piece with strong pose, silhouette, and comic-style linework.", price: "$150", time: "2-3 weeks", items: ["Pencils + inks","High-res file","Two revisions"], featured: true },
+                { tier: "Full Color Piece", desc: "A fully realized color illustration for characters, scenes, cover concepts, or original artwork.", price: "$300+", time: "3-5 weeks", items: ["Full color rendering","Print-ready file","Multiple revisions"], featured: false },
               ].map((c, i) => (
                 <Reveal key={c.tier} delay={0.08 + i * 0.08}>
                   <div className="card" style={{ padding: "clamp(28px,3vw,40px)", display: "flex", flexDirection: "column", position: "relative", height: "100%", ...(c.featured ? { borderColor: "rgba(200,118,42,0.45)" } : {}) }}>
@@ -355,7 +354,7 @@ export default function HomePage() {
 
           <Reveal delay={0.25}>
             <p style={{ textAlign: "center", fontFamily: "'IBM Plex Mono',monospace", fontSize: "0.625rem", letterSpacing: "0.12em", color: "rgba(245,242,237,0.25)" }}>
-              All commissions for personal use. Commercial licensing available on request. 50% deposit required to begin.
+              Commission scope, usage, and timeline confirmed before work begins. Commercial licensing available on request. 50% deposit required to begin.
             </p>
           </Reveal>
         </div>
@@ -410,7 +409,7 @@ export default function HomePage() {
                     LET&apos;S<br />WORK.
                   </h2>
                   <p style={{ fontFamily: "'Lora',Georgia,serif", fontSize: "1.0625rem", lineHeight: 1.8, color: "rgba(245,242,237,0.58)", marginBottom: "48px" }}>
-                    Training inquiry or art commission, I will get back to you within 24 hours.
+                    Training inquiry or art commission, send a few details and Alexio will follow up directly.
                   </p>
                 </Reveal>
                 <Reveal delay={0.1}>
