@@ -389,7 +389,7 @@ export default function HomePage() {
             <style>{`@media(max-width:767px){#testi-grid{grid-template-columns:1fr!important}}`}</style>
             <div style={{ display: "contents" }}>
               {[
-                { text: "Alexio is one of the most knowledgeable trainers I have worked with. He explains the why behind every movement. I made more progress in three months than I did in the previous year training on my own.", name: "Client Name Pending", result: "Specific result pending Alexio approval", detail: "In-person, Manhattan" },
+                { text: "After a motorcycle accident, I was facing a long recovery and possible shoulder surgery. Lex helped me rebuild mobility, stability, and confidence under the bar. I’m now back to training six days a week, and my bench is stronger than it was before the accident.", name: "Client Name Pending", result: "Post-accident recovery support", detail: "Training, MidCity Gym" },
                 { text: "The commission he did for me was incredible. He captured exactly what I had in my head, down to details I barely articulated. Fast, professional, and genuinely talented.", name: "Client Name Pending", result: "Character Illustration Commission", detail: "Character illustration" },
               ].map((t, i) => (
                 <Reveal key={i} delay={0.1 + i * 0.1}>
