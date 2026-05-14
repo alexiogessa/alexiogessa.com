@@ -256,7 +256,7 @@ export default function HomePage() {
                         </li>
                       ))}
                     </ul>
-                    <a href={BOOK_SESSION_URL} target="_blank" rel="noreferrer" className="btn-primary" style={{ textAlign: "center" }}>Book a Session</a>
+                    <a href={BOOK_SESSION_URL} target="_blank" rel="noreferrer" className="btn-primary" style={{ textAlign: "center" }}>{`Book ${s.format} — ${s.rate}`}</a>
                   </div>
                 </Reveal>
               ))}
@@ -266,7 +266,7 @@ export default function HomePage() {
           <Reveal delay={0.2}>
             <div style={{ maxWidth: "960px", margin: "0 auto", padding: "20px 28px", background: "rgba(200,118,42,0.05)", border: "1px solid rgba(200,118,42,0.2)", textAlign: "center" }}>
               <p style={{ fontFamily: "'IBM Plex Mono',monospace", fontSize: "0.75rem", color: "rgba(245,242,237,0.45)" }}>
-                <span style={{ color: "var(--copper)" }}>Note —</span> Independent sessions take place at MidCity Gym, Manhattan. Packages and long-term rates available on request.
+                <span style={{ color: "var(--copper)" }}>Note —</span> In-person sessions are held at MidCity Gym, Manhattan. Ask about 10-session packages and monthly programming rates.
               </p>
             </div>
           </Reveal>
@@ -289,10 +289,10 @@ export default function HomePage() {
             </div>
           </Reveal>
 
-          {/* Portfolio grid */}
+          {/* Portfolio grid — add 3–6 more items here when Alexio supplies approved artwork. */}
           <Reveal delay={0.1}>
             <div id="portfolio-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: "8px", marginBottom: "12px" }}>
-              <style>{`@media(max-width:767px){#portfolio-grid{grid-template-columns:1fr!important}}`}</style>
+              <style>{`@media(max-width:900px){#portfolio-grid{grid-template-columns:repeat(2,1fr)!important}}@media(max-width:767px){#portfolio-grid{grid-template-columns:1fr!important}}`}</style>
                 {[
                   { src: "/art-frankenstein.jpg", label: "Frankenstein", alt: "Painting of Frankenstein's monster against a coral background" },
                   { src: "/art-figure-sword.jpg", label: "Warrior Study", alt: "Painting of a woman holding a sword surrounded by green energy" },
@@ -337,7 +337,7 @@ export default function HomePage() {
             <style>{`@media(max-width:900px){#commission-grid{grid-template-columns:1fr!important}}`}</style>
             <div style={{ display: "contents" }}>
               {[
-                { tier: "Pencil Sketch Portrait", desc: "A detailed portrait study with clean structure, likeness, and expressive pencil work. Best for personal portraits and character studies.", price: "$1,325", time: "By request", items: ["Pencil portrait study","High-res file","One revision"], featured: false },
+                { tier: "Pencil Sketch Portrait", desc: "A detailed portrait study with clean structure, likeness, and expressive pencil work. Best for personal portraits and character studies.", price: "$125", time: "By request", items: ["Pencil portrait study","High-res file","One revision"], featured: false },
                 { tier: "Inked Character Illustration", desc: "A fully inked character piece with strong pose, silhouette, and comic-style linework.", price: "$150", time: "2-3 weeks", items: ["Pencils + inks","High-res file","Two revisions"], featured: true },
                 { tier: "Full Color Piece", desc: "A fully realized color illustration for characters, scenes, cover concepts, or original artwork.", price: "$300+", time: "3-5 weeks", items: ["Full color rendering","Print-ready file","Multiple revisions"], featured: false },
               ].map((c, i) => (
@@ -389,8 +389,8 @@ export default function HomePage() {
             <style>{`@media(max-width:767px){#testi-grid{grid-template-columns:1fr!important}}`}</style>
             <div style={{ display: "contents" }}>
               {[
-                { text: "Alexio is one of the most knowledgeable trainers I have worked with. He explains the why behind every movement. I made more progress in three months than I did in the previous year training on my own.", name: "Training Client", detail: "In-person, Manhattan" },
-                { text: "The commission he did for me was incredible. He captured exactly what I had in my head, down to details I barely articulated. Fast, professional, and genuinely talented.", name: "Commission Client", detail: "Character illustration" },
+                { text: "Alexio is one of the most knowledgeable trainers I have worked with. He explains the why behind every movement. I made more progress in three months than I did in the previous year training on my own.", name: "Client Name Pending", result: "Specific result pending Alexio approval", detail: "In-person, Manhattan" },
+                { text: "The commission he did for me was incredible. He captured exactly what I had in my head, down to details I barely articulated. Fast, professional, and genuinely talented.", name: "Client Name Pending", result: "Character Illustration Commission", detail: "Character illustration" },
               ].map((t, i) => (
                 <Reveal key={i} delay={0.1 + i * 0.1}>
                   <div className="testimonial-card" style={{ padding: "clamp(32px,4vw,48px)", display: "flex", flexDirection: "column" }}>
@@ -398,7 +398,65 @@ export default function HomePage() {
                     <p style={{ fontFamily: "'Lora',Georgia,serif", fontSize: "1.0625rem", lineHeight: 1.8, color: "rgba(245,242,237,0.62)", marginBottom: "32px", flex: 1, paddingLeft: "20px" }}>{t.text}</p>
                     <div style={{ paddingLeft: "20px", paddingTop: "24px", borderTop: "1px solid rgba(245,242,237,0.07)" }}>
                       <div style={{ fontFamily: "'Barlow Condensed',sans-serif", fontWeight: 800, fontSize: "1.25rem", color: "var(--white)" }}>{t.name}</div>
-                      <div style={{ fontFamily: "'IBM Plex Mono',monospace", fontSize: "0.625rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "var(--copper)", marginTop: "4px" }}>{t.detail}</div>
+                      <div style={{ fontFamily: "'Lora',Georgia,serif", fontSize: "0.875rem", color: "rgba(245,242,237,0.56)", marginTop: "4px" }}>{t.result}</div>
+                      <div style={{ fontFamily: "'IBM Plex Mono',monospace", fontSize: "0.625rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "var(--copper)", marginTop: "6px" }}>{t.detail}</div>
+                    </div>
+                  </div>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section id="faq" style={{ background: "var(--bg-card)" }}>
+        <div className="container section-pad">
+          <Reveal>
+            <div style={{ textAlign: "center", maxWidth: "640px", margin: "0 auto 56px" }}>
+              <span className="section-label">Frequently Asked</span>
+              <div className="copper-rule" style={{ margin: "16px auto 32px" }} />
+              <h2 style={{ fontFamily: "'Barlow Condensed',sans-serif", fontWeight: 900, fontSize: "clamp(2.75rem,5vw,5rem)", lineHeight: 0.93, letterSpacing: "-0.02em", color: "var(--white)" }}>
+                GOOD QUESTIONS.
+              </h2>
+            </div>
+          </Reveal>
+
+          <div id="faq-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "24px", maxWidth: "1100px", margin: "0 auto" }}>
+            <style>{`@media(max-width:900px){#faq-grid{grid-template-columns:1fr!important}}`}</style>
+            <div style={{ display: "contents" }}>
+              {[
+                {
+                  group: "Training",
+                  questions: [
+                    ["Do I need to already be in shape to train with you?", "No. Whether you’re starting from scratch or coming back after time off, training is built around where you are right now — not where you think you should be. The program adapts to you."],
+                    ["What happens in a first session?", "We talk about your goals, assess your movement, and get to work. No lengthy intake process — just an honest look at where you are and what you need to build from there."],
+                    ["Do you offer packages or long-term rates?", "Yes. Session packages and monthly programming rates are available. Reach out and we’ll put together something that fits your schedule and budget."],
+                    ["How does virtual training actually work?", "Sessions run live over video. You’ll get custom programming, real-time form feedback, and the same level of attention as in-person — just from wherever you are."],
+                    ["Where are in-person sessions held?", "At MidCity Gym & Tanning, 345 W 42nd St, Manhattan."],
+                  ],
+                },
+                {
+                  group: "Commissions",
+                  questions: [
+                    ["How do I start a commission?", "Use the contact form or email art@alexiogessa.com with a description of what you’re looking for. Alexio will follow up to confirm scope, timeline, and pricing before anything begins."],
+                    ["What do I need to provide?", "Reference images are always helpful — photos, character descriptions, mood references, whatever gives the clearest picture of your vision. The more specific you are, the better the result."],
+                    ["How do revisions work?", "Each commission tier includes a set number of revisions listed in the pricing. Revisions cover adjustments to the agreed scope — not full redesigns. Additional revisions can be discussed."],
+                    ["Do you do commercial work or licensing?", "Yes — commercial licensing is available on request. Mention it upfront and it’ll be factored into the quote."],
+                    ["What’s the deposit and payment process?", "A 50% deposit is required to begin. The remainder is due on delivery. Payment details are confirmed during the initial conversation."],
+                  ],
+                },
+              ].map((section, sectionIndex) => (
+                <Reveal key={section.group} delay={sectionIndex * 0.1}>
+                  <div className="card" style={{ padding: "clamp(28px,3vw,40px)", height: "100%" }}>
+                    <h3 style={{ fontFamily: "'Barlow Condensed',sans-serif", fontWeight: 900, fontSize: "2rem", color: "var(--white)", marginBottom: "24px" }}>{section.group}</h3>
+                    <div style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
+                      {section.questions.map(([question, answer]) => (
+                        <div key={question} style={{ borderTop: "1px solid rgba(245,242,237,0.07)", paddingTop: "20px" }}>
+                          <h4 style={{ fontFamily: "'Barlow Condensed',sans-serif", fontWeight: 800, fontSize: "1.25rem", color: "var(--copper)", marginBottom: "8px" }}>{question}</h4>
+                          <p style={{ fontFamily: "'Lora',Georgia,serif", fontSize: "0.9375rem", lineHeight: 1.75, color: "rgba(245,242,237,0.58)" }}>{answer}</p>
+                        </div>
+                      ))}
                     </div>
                   </div>
                 </Reveal>
@@ -409,7 +467,7 @@ export default function HomePage() {
       </section>
 
       {/* CONTACT */}
-      <section id="contact" style={{ background: "var(--bg-card)" }}>
+      <section id="contact" style={{ background: "var(--bg)" }}>
         <div className="container section-pad">
           <div id="contact-grid" style={{ display: "grid", gridTemplateColumns: "2fr 3fr", gap: "clamp(40px,6vw,100px)" }}>
             <style>{`@media(max-width:767px){#contact-grid{grid-template-columns:1fr!important}}`}</style>
