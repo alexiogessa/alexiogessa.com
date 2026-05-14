@@ -33,11 +33,19 @@ export async function POST(req: Request) {
 
     const resend = new Resend(process.env.RESEND_API_KEY);
 
-    await resend.emails.send({
-      from: "Website Contact <alexio@alexiogessa.com>",
+    const result = await resend.emails.send({
+      from: "Website Contact <contact@alexiogessa.com>",
       to: "alexio@alexiogessa.com",
       replyTo: email,
       subject: `New website inquiry from ${name}`,
+      text: [
+        `Name: ${name}`,
+        `Email: ${email}`,
+        `Interest: ${reason}`,
+        "",
+        "Message:",
+        message,
+      ].join("\n"),
       html: `
         <p><strong>Name:</strong> ${escapeHtml(name)}</p>
         <p><strong>Email:</strong> ${escapeHtml(email)}</p>
@@ -46,6 +54,11 @@ export async function POST(req: Request) {
         <p>${escapeHtml(message).replace(/\n/g, "<br />")}</p>
       `,
     });
+
+    if (result.error) {
+      console.error("Resend rejected contact form email:", result.error);
+      return NextResponse.json({ error: "Failed to send message" }, { status: 500 });
+    }
 
     return NextResponse.json({ ok: true });
   } catch (error) {
