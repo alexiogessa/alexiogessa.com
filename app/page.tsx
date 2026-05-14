@@ -3,6 +3,8 @@
 import { useEffect, useRef, useState, FormEvent } from "react";
 import Image from "next/image";
 
+const BOOK_SESSION_URL = "https://calendar.app.google/kU5FrdkkUqTQkszh9";
+
 function useReveal() {
   const ref = useRef<HTMLDivElement>(null);
   useEffect(() => {
@@ -25,18 +27,29 @@ function Reveal({ children, delay = 0, style = {} }: { children: React.ReactNode
 }
 
 function ContactForm() {
-  const [status, setStatus] = useState<"idle" | "sent" | "error">("idle");
-  function handleSubmit(e: FormEvent<HTMLFormElement>) {
+  const [status, setStatus] = useState<"idle" | "loading" | "sent" | "error">("idle");
+
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const form = e.currentTarget;
     const name = (form.elements.namedItem("name") as HTMLInputElement).value;
     const email = (form.elements.namedItem("email") as HTMLInputElement).value;
     const reason = (form.elements.namedItem("reason") as HTMLSelectElement).value;
     const message = (form.elements.namedItem("message") as HTMLTextAreaElement).value;
-    const subject = encodeURIComponent(`Alexio Gessa inquiry — ${reason}`);
-    const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\nInterest: ${reason}\n\n${message}`);
+
+    setStatus("loading");
+
     try {
-      window.location.href = `mailto:alexio@alexiogessa.com?subject=${subject}&body=${body}`;
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, reason, message }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Contact request failed");
+      }
+
       setStatus("sent");
       form.reset();
     } catch {
@@ -87,10 +100,10 @@ function ContactForm() {
         <textarea name="message" required rows={5} placeholder="Tell me what you are looking for." style={{ ...field, resize: "vertical", minHeight: "140px" }} />
       </div>
       <div>
-        <button type="submit" className="btn-primary">
-          Send Inquiry
+        <button type="submit" className="btn-primary" disabled={status === "loading"}>
+          {status === "loading" ? "Sending..." : "Send Inquiry"}
         </button>
-        {status === "sent" && <p style={{ color: "#4ade80", fontFamily: "monospace", fontSize: "0.875rem", marginTop: "12px" }}>Your email app should open with the inquiry ready to send.</p>}
+        {status === "sent" && <p style={{ color: "#4ade80", fontFamily: "monospace", fontSize: "0.875rem", marginTop: "12px" }}>Message sent. Alexio will follow up directly.</p>}
         {status === "error" && <p style={{ color: "#f87171", fontFamily: "monospace", fontSize: "0.875rem", marginTop: "12px" }}>Something went wrong. Email alexio@alexiogessa.com directly.</p>}
       </div>
     </form>
@@ -110,7 +123,7 @@ export default function HomePage() {
             ))}
             <style>{`.nav-visible{display:none}@media(min-width:768px){.nav-visible{display:inline}}@media(max-width:767px){.site-header-bar{padding-left:18px!important;padding-right:18px!important}.site-header-nav{display:none!important}.site-header-cta{display:none!important}}`}</style>
           </nav>
-          <a href="#contact" className="btn-primary site-header-cta" style={{ padding: "10px 22px", fontSize: "0.8125rem" }}>Book Now</a>
+          <a href={BOOK_SESSION_URL} target="_blank" rel="noreferrer" className="btn-primary site-header-cta" style={{ padding: "10px 22px", fontSize: "0.8125rem" }}>Book Now</a>
         </div>
       </header>
 
@@ -132,7 +145,7 @@ export default function HomePage() {
               One-on-one strength, physique, and mobility coaching at MidCity Gym in Manhattan, plus virtual programming worldwide. Fifteen years of hands-on experience. No template programs.
             </p>
             <div className="fade-up fade-up-4" style={{ display: "flex", flexDirection: "column", alignItems: "flex-start", gap: "16px" }}>
-              <a href="#contact" className="btn-primary">Book a Session</a>
+              <a href={BOOK_SESSION_URL} target="_blank" rel="noreferrer" className="btn-primary">Book a Session</a>
               <a href="#portfolio" className="quiet-link">Or see his artwork →</a>
             </div>
           </div>
@@ -243,7 +256,7 @@ export default function HomePage() {
                         </li>
                       ))}
                     </ul>
-                    <a href="#contact" className="btn-primary" style={{ textAlign: "center" }}>Book a Session</a>
+                    <a href={BOOK_SESSION_URL} target="_blank" rel="noreferrer" className="btn-primary" style={{ textAlign: "center" }}>Book a Session</a>
                   </div>
                 </Reveal>
               ))}
